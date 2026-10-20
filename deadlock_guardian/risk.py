@@ -7,11 +7,13 @@ Her process, Process.max_claim ile "her kaynaktan en çok kaç adet isteyeceğin
 
 
 def compute_need(system):
-    """Need = Max - Held. {process: {kaynak: adet}}.
-    Yalnızca aktif (TERMINATED olmayan) process'ler; tüm kaynaklar her process'te yer alır.
-    Negatif olamaz (max, held'den küçükse 0)."""
-    # TODO (Üye 3, Sprint 1)
-    raise NotImplementedError("compute_need: Üye 3")
+    def compute_need(system):    need = {}
+    for p in system.active_processes():        
+        need[p.name] = {}       
+        for rname in system.resources:
+             kalan_ihtiyac = p.max_claim.get(rname, 0) - p.held.get(rname, 0)           
+             need[p.name][rname] = max(0, kalan_ihtiyac)
+             return need
 
 
 def is_safe(system):
