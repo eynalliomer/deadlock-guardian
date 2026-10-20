@@ -1,0 +1,13 @@
+{
+  "resources": {"R1": 1, "R2": 1},
+  "processes": {
+    "P1": {"priority": 1, "max": {"R1": 1, "R2": 1}},
+    "P2": {"priority": 1, "max": {"R1": 1, "R2": 1}}
+  },
+  "steps": [
+    ["P1", "request", "R1"],
+    ["P2", "request", "R2"],
+    ["P1", "request", "R2"],
+    ["P2", "request", "R1"]
+  ]
+}
