@@ -4,11 +4,8 @@
 
 
 def victim_cost(process):
-    """Process'in kurban seçilme maliyeti (düşük = önce o sonlandırılır).
-        maliyet = öncelik*10  -  2 * (tuttuğu toplam adet)  +  5 * victim_count
-    Örn: priority=1, held={"R1": 1}, victim_count=0  ->  10 - 2 + 0 = 8"""
-    # TODO (Üye 4, Sprint 1)
-    raise NotImplementedError("victim_cost: Üye 4")
+    toplam = sum(process.held.values())
+    return process.priority * 10 - 2 * toplam + 5 * process.victim_count
 
 
 def choose_victim(system, deadlocked):
