@@ -6,7 +6,7 @@ Her görevin bitip bitmediğini **kırmızı testler** söyler: ilgili test dosy
 | | **Üye 1: Simülasyon** | **Üye 2: Tespit** | **Üye 3: Risk** | **Üye 4: Kurtarma ve Demo** |
 |---|---|---|---|---|
 | **Ad Soyad** | ______________ | ______________ | ______________ | __Efe Yılmaz____________ |
-| **GitHub kullanıcı adı** | ______________ | ______________ | ____bahadir-e_________ | ______________ |
+| **GitHub kullanıcı adı** | ______________ | ______________ | ____________ | _________bahadir-e_____ |
 | **Dosyaları** | `simulation.py`, `scenario.py`, `models.py` | `detection.py` | `risk.py` | `recovery.py`, `printer.py`, `demo.py` |
 | **Test dosyası** | `test_simulation.py` | `test_detection.py` | `test_risk.py` | `test_recovery.py`, `test_printer_demo.py` |
 | **Ders konusu** | Process durumları, kaynak tahsisi, bekleme kuyruğu | Resource Allocation Graph, döngü, deadlock detection | Güvenli durum, Banker's Algorithm, risk | Deadlock recovery, kurban seçimi |
