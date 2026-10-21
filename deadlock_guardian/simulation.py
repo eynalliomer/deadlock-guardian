@@ -1,4 +1,4 @@
-"""Simülasyon motoru: process'ler kaynak ister, bırakır, bekler.  SAHİBİ: ÜYE 1.
+"""Simülasyon motoru: process'ler kaynak ister, bırakır, bekler.  SAHİBİ: eynalliomer.
 
 System (models.py) sadece veriyi tutar; durumu DEĞİŞTİREN her şey burada yapılır.
 Kurallar:
@@ -11,25 +11,22 @@ Kurallar:
   - Geçersiz işlemde ValueError: bilinmeyen process/kaynak, sonlandırılmış ya da bekleyen
     process'in yeni istek yapması, adet < 1 ya da kaynağın toplamından fazla, tutandan fazla bırakma.
 """
-
+from .models import RUNNING
 
 class Simulation:
     def __init__(self, system):
         self.system = system
 
     def request(self, pname, rname, amount=1):
-        """pname, rname'den amount adet ister. Verildiyse True, bekletildiyse False döner."""
-        # TODO (Üye 1, Sprint 1): önce yalnızca "kaynak boş, hemen ver" durumunu yaz.
-        # TODO (Üye 1, Sprint 2): bekletme (WAITING + kuyruk), doğrulamalar, log.
-        raise NotImplementedError("request: Üye 1")
+        p = self.system.processes[pname]
+        if self.system.available(rname) >= amount:
+            p.held[rname] = p.held.get(rname, 0) + amount
+            p.state = RUNNING
+            self.system.log.append(f"{pname} REQUEST {rname} x{amount} -> GRANTED")
+            return True
 
-    def release(self, pname, rname, amount=1):
-        """pname, rname'den amount adet bırakır; kuyruktaki bekleyenlere sırayla verilir."""
-        # TODO (Üye 1, Sprint 2)
-        raise NotImplementedError("release: Üye 1")
+        raise NotImplementedError("request() henüz tamamlanmadı")
+          
+            
+            
 
-    def terminate(self, pname):
-        """process'i sonlandırır: durumu TERMINATED, tuttuğu her şey bırakılır, bekleyenlere verilir.
-        (recovery modülü bunu çağırır)"""
-        # TODO (Üye 1, Sprint 2)
-        raise NotImplementedError("terminate: Üye 1")
