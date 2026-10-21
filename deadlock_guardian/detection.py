@@ -13,8 +13,21 @@ def wait_for_graph(system):
     bile []). Listeler alfabetik ve tekrarsız.
         P1 R1'i tutuyor, P2 R1'i bekliyor  ->  {"P1": [], "P2": ["P1"]}
     """
-    # TODO (Üye 2, Sprint 1)
-    raise NotImplementedError("wait_for_graph: Üye 2")
+    graf = {}
+    for p in system.active_processes():
+        graf[p.name] = []
+
+
+    for p in system.active_processes():
+        for rname in p.waiting_for:
+            for q in system.active_processes():
+                if q.name != p.name and q.held.get(rname, 0) > 0:
+                    if q.name not in graf[p.name]:
+                        graf[p.name].append(q.name)
+        graf[p.name].sort()
+    return graf
+
+
 
 
 def find_cycle(graph):
