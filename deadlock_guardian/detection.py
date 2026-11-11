@@ -28,15 +28,36 @@ def wait_for_graph(system):
     return graf
 
 
+def ulasilabilir(graph, bas):
+    "bas dügümünden baslayip oklari izleyerek gidilebilen tüm dügümler"
+    gidilenler = []
+    gidilecekler = list(graph[bas])
+    while gidilecekler:
+        d = gidilecekler.pop()
+        if d not in gidilenler:
+            gidilenler.append(d)
+            gidilecekler.extend(graph[d])
+    return gidilenler
 
 
 def find_cycle(graph):
-    """Grafta bir döngü varsa döngüdeki düğümlerin listesini, yoksa None döndürür.
-    DFS ile ara (düğümleri beyaz/gri/siyah işaretle). Döngünün hangi düğümden başladığı önemli değil.
-        {"P1": ["P2"], "P2": ["P1"]}  ->  ["P1", "P2"]
-    """
-    # TODO (Üye 2, Sprint 2)
-    raise NotImplementedError("find_cycle: Üye 2")
+    """Grafta bir döngü varsa döngüdeki düğümlerin listesini, yoksa None döndürür"""
+    for d in graph:
+        if d in ulasilabilir(graph, d): #kendine geri donebiliyorsa dongude
+            dongu = []
+            for x in ulasilabilir(graph, d):
+                if d in ulasilabilir(graph, x): #x de d'ye geri donebiliyor mu?
+                    dongu.append(x)
+            return sorted(dongu)
+    return None   
+
+
+def sigiyor(p, work):
+    "p'nin bekledigi her sey, bostaki kaynaklara sigiyor mu?"
+    for rname, adet in p.waiting_for.items():
+        if adet > work[rname]:
+            return False
+    return True
 
 
 def find_deadlocked(system):
@@ -52,5 +73,22 @@ def find_deadlocked(system):
     Sonlandırılmış process'ler hesaba katılmaz.
     NOT: Grafta döngü olması deadlock olduğu anlamına GELMEZ (kaynaktan birden fazla varsa).
     """
-    # TODO (Üye 2, Sprint 2)
-    raise NotImplementedError("find_deadlocked: Üye 2")
+    work = {}
+    for rname in system.resources:
+        work[rname] = system.available(rname)
+
+    kalan = list(system.active_processes())
+    degisti = True
+    while degisti:
+        degisti = False
+        for p in kalan:
+            if sigiyor(p, work): #bu process bitebilir
+                for rname, adet in p.held.items():
+                    work[rname] = work[rname] + adet #bitince tuttuklarini geri verir
+                kalan.remove(p)
+                degisti = True
+                break
+    sonuc = []
+    for p in kalan:
+        sonuc.append(p.name)
+    return sorted(sonuc)
