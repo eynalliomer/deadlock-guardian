@@ -1,23 +1,39 @@
-"""Kurtarma (recovery): deadlock'tan çıkmak için kurban seçip sonlandırmak.  SAHİBİ: ÜYE 4.
-(Ders kitabı: Silberschatz Bölüm 8, recovery from deadlock)
-"""
+from .detection import find_deadlocked
 
 
 def victim_cost(process):
+    """Bir process'in feda edilme maliyetini hesaplar."""
     toplam = sum(process.held.values())
     return process.priority * 10 - 2 * toplam + 5 * process.victim_count
 
 
 def choose_victim(system, deadlocked):
-    """deadlocked (process adları) arasından en düşük maliyetli olanı döndürür.
-    Maliyet eşitse alfabetik olarak ilk isim. Liste boşsa ValueError."""
-    # TODO (Üye 4, Sprint 2)
-    raise NotImplementedError("choose_victim: Üye 4")
+    
+    if not deadlocked:
+        raise ValueError("deadlock listesi bos")
+
+    en_iyi = None
+    en_dusuk = None
+
+    for ad in sorted(deadlocked):  # alfabetik bak: eşitlikte ilk gelen kalır
+        maliyet = victim_cost(system.processes[ad])
+        if en_dusuk is None or maliyet < en_dusuk:
+            en_dusuk = maliyet
+            en_iyi = ad
+
+    return en_iyi
 
 
 def recover(sim):
-    """Deadlock bitene kadar: find_deadlocked -> choose_victim -> victim_count += 1 -> sim.terminate.
-    Sonlandırılan process adlarını sırayla (liste) döndürür. Deadlock yoksa [].
-    (Bu fonksiyon Üye 1'in terminate'ine ve Üye 2'nin find_deadlocked'ine dayanır; onlar bitince çalışır.)"""
-    # TODO (Üye 4, Sprint 2)
-    raise NotImplementedError("recover: Üye 4")
+   
+    kurbanlar = []
+
+    while True:
+        deadlock = find_deadlocked(sim.system)
+        if not deadlock:
+            return kurbanlar
+
+        kurban = choose_victim(sim.system, deadlock)
+        sim.system.processes[kurban].victim_count += 1
+        sim.terminate(kurban)
+        kurbanlar.append(kurban)
