@@ -24,24 +24,24 @@ python -m pytest -q                                    # testler
 
 Windows'ta `python3` yerine `py` yazın.
 
-## Şu an ne çalışıyor? (Sprint 1)
+## Şu an ne çalışıyor? (Sprint 2)
 
-`python -m deadlock_guardian scenarios/deadlock.json` komutu senaryo dosyasını **okuyup belleğe alır**
-(2 process, 2 kaynak, 4 adım) ve başlangıç durumunu tablo olarak yazar. Ardından modüller sırayla dolacak.
-`python -m pytest -q` ortak kısımların testlerini çalıştırır. Her modülün testi, o modül yazılırken
-`tests/` altına eklenir; depo üyeler commit attıkça dolar.
+`python -m deadlock_guardian scenarios/deadlock.json` senaryoyu adım adım çalıştırır. Her adımdan sonra
+sistemin durumunu ve risk seviyesini (LOW / MEDIUM / HIGH / CRITICAL) yazar. Deadlock oluşunca bunu tespit
+eder, kurban process'i seçip sonlandırır ve sistemi kurtarır. `scenarios/normal.json` deadlock'suz bir akış gösterir.
+`python -m pytest -q` tüm modüllerin birim testlerini çalıştırır.
 
 ## Modüller
 
 | Modül | Ne yapar? | Sahibi | Durum |
 |---|---|---|---|
-| `models.py`, `scenario.py` | Ortak veri yapıları, senaryo okuma | Üye 1 | ✅ iskelet hazır |
-| `simulation.py` | request / release / bekleme kuyruğu / terminate | Üye 1 | ⏳ |
-| `detection.py` | Bekleme grafı, döngü, deadlock tespiti | Üye 2 | ⏳ |
-| `risk.py` | Banker's Algorithm, risk seviyeleri | Üye 3 | ⏳ |
-| `recovery.py`, `printer.py`, `demo.py` | Kurban seçimi, kurtarma, ekran çıktısı, demo | Üye 4 | ⏳ (printer ✅) |
+| `models.py`, `scenario.py` | Ortak veri yapıları, senaryo okuma | Ömer Faruk Eynallı | ✅ |
+| `simulation.py` | request / release / bekleme kuyruğu / terminate | Ömer Faruk Eynallı | ✅ |
+| `detection.py` | Bekleme grafı, döngü, deadlock tespiti | Selma Süeda Özçallı | ✅ |
+| `risk.py` | Banker's Algorithm, risk seviyeleri | Meri Lara Elesho | ✅ |
+| `recovery.py`, `printer.py`, `demo.py` | Kurban seçimi, kurtarma, ekran çıktısı, demo | Efe Yılmaz | ✅ |
 
-Her üyenin kendi dalı vardır: `uye1-simulasyon`, `uye2-tespit`, `uye3-risk`, `uye4-kurtarma-demo`.
+Her üyenin kendi dalı vardır: `eynalliomer-simulasyon`, `selmaozc-tespit`, `laraelesho-risk`, `bahadir-e-kurtarma-demo`.
 
 Ayrıntılar: [Görev dağılımı](docs/GOREV_DAGILIMI.md) · [Mimari ve arayüzler](docs/MIMARI.md) ·
 [Git çalışma düzeni](docs/GIT_CALISMA_DUZENI.md)
