@@ -39,7 +39,7 @@ eder, kurban process'i seçip sonlandırır ve sistemi kurtarır. `scenarios/nor
 | `simulation.py` | request / release / bekleme kuyruğu / terminate | Ömer Faruk Eynallı | ✅ |
 | `detection.py` | Bekleme grafı, döngü, deadlock tespiti | Selma Süeda Özçallı | ✅ |
 | `risk.py` | Banker's Algorithm, risk seviyeleri | Meri Lara Elesho | ✅ |
-| `recovery.py`, `printer.py`, `demo.py` | Kurban seçimi, kurtarma, ekran çıktısı, demo | Efe Yılmaz | ✅ |
+| `recovery.py`, `printer.py`, `demo.py` | Kurban seçimi, kurtarma, ekran çıktısı, demo | Bahadır Efe Yılmaz | ✅ |
 
 Her üyenin kendi dalı vardır: `eynalliomer-simulasyon`, `selmaozc-tespit`, `laraelesho-risk`, `bahadir-e-kurtarma-demo`.
 
