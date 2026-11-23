@@ -4,7 +4,7 @@
     "processes": {
         "P1": {"priority": 2, "max": {"R1": 1, "R2": 1}},
         "P2": {"priority": 1, "max": {"R2": 1, "R3": 1}},
-        "P3": {"priority": 3, "max": {"R3": 1, "R1": 1}},
+        "P3": {"priority": 3, "max": {"R3": 1, "R1": 1}}
     },
     "steps": [
         ["P1", "request", "R1"],
@@ -12,6 +12,6 @@
         ["P3", "request", "R3"],
         ["P1", "request", "R2"],
         ["P2", "request", "R3"],
-        ["P3", "release", "R1"]
+        ["P3", "request", "R1"]
     ]
 }
