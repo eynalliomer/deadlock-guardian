@@ -1,0 +1,20 @@
+{
+  "aciklama": "İki bağımsız deadlock (P1-P2 ve P3-P4); kurtarma iki kurban seçer: P1 ve P4.",
+  "resources": {"R1": 1, "R2": 1, "R3": 1, "R4": 1},
+  "processes": {
+    "P1": {"priority": 1, "max": {"R1": 1, "R2": 1}},
+    "P2": {"priority": 2, "max": {"R1": 1, "R2": 1}},
+    "P3": {"priority": 3, "max": {"R3": 1, "R4": 1}},
+    "P4": {"priority": 1, "max": {"R3": 1, "R4": 1}}
+  },
+  "steps": [
+    ["P1", "request", "R1"],
+    ["P2", "request", "R2"],
+    ["P3", "request", "R3"],
+    ["P4", "request", "R4"],
+    ["P1", "request", "R2"],
+    ["P3", "request", "R4"],
+    ["P2", "request", "R1"],
+    ["P4", "request", "R3"]
+  ]
+}
