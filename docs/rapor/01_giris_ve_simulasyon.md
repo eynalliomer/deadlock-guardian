@@ -68,6 +68,6 @@ ile çalıştırılır.
 
 ## 1.5 Test
 
-Simülasyon için 16 birim testi (`tests/test_simulation.py`) ve senaryolar için 7 test
-(`tests/test_senaryo_simulasyon.py`) vardır. Tüm modülleri birlikte sınayan entegrasyon testleri
+Simülasyonun temel kuralı `tests/test_simulation.py` içinde, iki senaryonun davranışı ise 7 testle
+(`tests/test_senaryo_simulasyon.py`) sınanır. Tüm modülleri birlikte sınayan entegrasyon testleri
 `tests/test_entegrasyon.py` içindedir. Testler `python -m pytest -q` ile çalıştırılır.
