@@ -1,0 +1,17 @@
+{
+  "aciklama": "Güvensiz durum deadlock değildir: 2. adımda HIGH ama takılan yok; 5. adımda deadlock.",
+  "resources": {
+    "R1": 3
+  },
+  "processes": {
+    "P1": {"priority": 1, "max": {"R1": 3}},
+    "P2": {"priority": 1, "max": {"R1": 3}}
+  },
+  "steps": [
+    ["P1", "request", "R1"],
+    ["P2", "request", "R1"],
+    ["P1", "request", "R1"],
+    ["P2", "request", "R1"],
+    ["P1", "request", "R1"]
+  ]
+}

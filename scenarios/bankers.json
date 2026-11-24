@@ -1,0 +1,22 @@
+{
+  "aciklama": "Ders kitabı Banker's örneği: 7. adımdaki istek güvenli (LOW), 8. adımdaki güvensiz (HIGH).",
+  "resources": {
+    "R1": 6,
+    "R2": 4
+  },
+  "processes": {
+    "P1": {"priority": 1, "max": {"R1": 4, "R2": 2}},
+    "P2": {"priority": 1, "max": {"R1": 3, "R2": 2}},
+    "P3": {"priority": 1, "max": {"R1": 4, "R2": 3}}
+  },
+  "steps": [
+    ["P1", "request", "R1", 2],
+    ["P1", "request", "R2"],
+    ["P2", "request", "R1"],
+    ["P2", "request", "R2"],
+    ["P3", "request", "R1"],
+    ["P3", "request", "R2"],
+    ["P1", "request", "R1"],
+    ["P3", "request", "R1"]
+  ]
+}
