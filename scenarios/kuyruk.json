@@ -1,0 +1,18 @@
+{
+  "aciklama": "FIFO kuyruk: 1 örnek boşalınca baştaki P2'ye (2 adet) yetmez, P3 de sırayı atlayamaz.",
+  "resources": {"R1": 2},
+  "processes": {
+    "P1": {"priority": 1, "max": {"R1": 2}},
+    "P2": {"priority": 1, "max": {"R1": 2}},
+    "P3": {"priority": 1, "max": {"R1": 1}}
+  },
+  "steps": [
+    ["P1", "request", "R1", 2],
+    ["P2", "request", "R1", 2],
+    ["P3", "request", "R1", 1],
+    ["P1", "release", "R1", 1],
+    ["P1", "release", "R1", 1],
+    ["P2", "release", "R1", 2],
+    ["P3", "release", "R1", 1]
+  ]
+}
